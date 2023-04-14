@@ -1,0 +1,51 @@
+{% extends 'events/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'vendor/css/events.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_content %}
+<div class="container">
+    <div class="row">
+        <h4 class="my-4">{{ events.name }}</h4>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 mb-4">
+            <div class="card h-50">
+            {% if events.suvenir_img %}
+                <img class="card-img-top" src="{{ events.suvenir_img.url }}" alt="">
+            {% else %}
+                <img class="card-img-top" src="{{ events.logo_img.url }}" alt="">
+            {% endif %}
+            </div>
+        </div>
+    </div>
+    <p>Дата проведения: <b><i>{{ events.date_sorev }}</i></b></p>
+    <p>Количество участников: <b><i>{{cnt_people_event}}</i></b></p>
+    <p>Количество команд: <b><i>{{events.num_com}}</i></b></p>
+    <p><a href="{{events.url_in_internet}}"><i>Подробная информация</i></a></p>
+    <p><a href="https://iorient.ru/Competition.aspx?CompetitionId={{events.id_in_iorient}}"><i>Протокол результатов</i></a></p>
+    {% autoescape off %}
+    <p>{{ events.info }}</p>
+    {% endautoescape %}
+    {% if event_peoples %}
+    <div class="container mt-3">
+        <h4 class="my-4">Список участников</h4>
+        <div class="table-responsive">
+            <table class="table table-borderless table-sm" >
+            {% for people in event_peoples %}
+                <tr>
+                    <td>{{forloop.counter}}.
+                        <a href="{% url 'events:people' people.people.id %}">{{people.people.fam}} {{people.people.nam}} ({{people.people.brd|date:'Y'}}г.р. , {{people.people.gorod}})</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+

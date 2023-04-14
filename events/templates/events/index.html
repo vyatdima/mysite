@@ -1,0 +1,30 @@
+{% extends 'events/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'vendor/css/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block page_content %}
+<section>
+    <!--    <div class="alert alert-light text-center" role="alert">-->
+    <!--        Информационное сообщение-->
+    <!--    </div>-->
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 class="mt-5">Большая прогулка</h1>
+                <p>
+                    Серия рогейнов "Большая прогулка"
+                </p>
+                <button id="start-purchase-btn" type="button" class="btn btn-lg">
+                    <a id="start-purchase-link" href="{% url 'events:events' %}">
+                        Подробнее о "Большой прогулке"
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

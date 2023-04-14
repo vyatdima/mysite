@@ -1,0 +1,16 @@
+{% extends 'events/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'vendor/css/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_content %}
+<div class="container text-center">
+    <h2>Результат</h2>
+    {% for item in massiv %}
+    <p>{{item}}</p>
+    {% endfor %}
+    <a href="{% url 'events:procedures' %}" class="btn btn-warning">Назад</a>
+</div>
+{% endblock %}

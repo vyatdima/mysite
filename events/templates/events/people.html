@@ -1,0 +1,54 @@
+{% extends 'events/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'vendor/css/events.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_content %}
+<div class="container">
+    <div class="row">
+        <h4 class="my-4">{{peoples.fam}} {{peoples.nam}} ({{peoples.brd|date:'Y'}}г.р. , {{peoples.gorod}})</h4>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 mb-4">
+            {% if peoples.photo %}
+            <div class="card h-50">
+                <img class="card-img-top" src="{{ peoples.photo.url }}" alt="">
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-9 col-md-6 mb-4">
+             <div class="table-responsive">
+                    <table class="table table-bordered table-sm" >
+                    <thead>
+                    <tr>
+                        <th>Мероприятие</th>
+                        <th>Рейтинг</th>
+                        <th>Место</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for people in events_people %}
+                        <tr>
+                            <td>{{forloop.counter}}.
+                                {{people.event.date_sorev|date:"d.m.Y"}} "{{people.event.name}}" ({{people.event.pk}})
+                            </td>
+                            <td>{% if people.reiting > 0 %}{{people.reiting}}{% endif %}
+                            </td>
+                            <td>
+                                 {% if people.zoloto %}1{% endif %}
+                                 {% if people.serebro %}2{% endif %}
+                                 {% if people.bronza %}3{% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    </table>
+             </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
